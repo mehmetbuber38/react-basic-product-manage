@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login';
 import useToken from './useToken';
-import './App.css';
 import { ProductContextProvider } from "../../context/ProductContext";
 import DetailProduct from '../DetailProduct/DetailProduct';
 

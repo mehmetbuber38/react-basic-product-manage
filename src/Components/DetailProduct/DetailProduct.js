@@ -1,11 +1,21 @@
 import React, { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import { ProductContext } from "../../context/ProductContext";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function DetailProduct() {
-  const [singleProduct, setSingleProduct] = useState([])
+  const [singleProduct, setSingleProduct] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
+
+  const [values, setValues] = useState({
+    title: '',
+    price: 0,
+    description: '',
+    category: ''
+  });
   const { title } = useParams();
   const products = useContext(ProductContext);
+
 
   useEffect(() => {
     const findProduct = () => {
@@ -23,132 +33,187 @@ export default function DetailProduct() {
     }).then(res => res.json())
       .then(json => (
         console.log(json),
-        alert(`'DELETED', ${json.title}`)
+        toast.success('Delete Product, please open console', {
+          icon: '👏',
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '18px'
+          },
+        })
       ))
   }
+
+  const handleTitleInputChange = (event) => {
+    event.persist();
+    setValues((values) => ({
+      ...values,
+      title: event.target.value,
+    }));
+  };
+
+  const handlePriceInputChange = (event) => {
+    event.persist();
+    setValues((values) => ({
+      ...values,
+      price: event.target.value,
+    }));
+  };
+
+  const handleCategoryInputChange = (event) => {
+    event.persist();
+    setValues((values) => ({
+      ...values,
+      category: event.target.value,
+    }));
+  };
+
+  const handleDescriptionInputChange = (event) => {
+    event.persist();
+    setValues((values) => ({
+      ...values,
+      description: event.target.value,
+    }));
+  };
+
+  console.log({ values });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+
+    fetch(`https://fakestoreapi.com/products`, {
+      method: "POST",
+      body: JSON.stringify(values)
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+        toast.success('Save Product, please open console', {
+          icon: '👏',
+          style: {
+            borderRadius: '10px',
+            background: '#000',
+            color: '#fff',
+            fontSize: '18px'
+          },
+        })
+      })
+  };
 
   return (
     <>
       <div className="container">
-        <div className="row">
-          <div className="col lg:col-3">
-            <img src={singleProduct.image} alt={singleProduct.title} width="50" className="max-w-full h-auto rounded-lg" />
-          </div>
-
-          <div className="col lg:col-9">
-            <div>
-              <label
-                htmlFor="first-name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Başlık
-              </label>
-              <input
-                type="text"
-                name="first-name"
-                id="first-name"
-                autoComplete="given-name"
-                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                value={singleProduct.title}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="last-name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Fiyat
-              </label>
-
-              <input
-                type="text"
-                name="last-name"
-                id="last-name"
-                autoComplete="family-name"
-                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                value={singleProduct.price}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                Kategori
-              </label>
-              <select
-                id="country"
-                name="country"
-                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              >
-                <option>
-                  {singleProduct.category}
-                </option>
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor="stockInput"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Stock
-              </label>
-              <input
-                type="text"
-                name="stock"
-                id="stockInput"
-                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                value={singleProduct ? singleProduct.title && singleProduct.rating.count : "Loading..."}
-              />
-            </div>
-
-            <div>
-              <>
-                <label
-                  htmlFor="exampleFormControlTextarea1"
-                  className="form-label inline-block mb-2 text-gray-700"
-                >
-                  Açıklama
-                </label>
-                <textarea
-                  className="
-  form-control
-  block
-  w-full
-  px-3
-  py-1.5
-  text-base
-  font-normal
-  text-gray-700
-  bg-white bg-clip-padding
-  border border-solid border-gray-300
-  rounded
-  transition
-  ease-in-out
-  m-0
-  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-"
-                  id="exampleFormControlTextarea1"
-                  rows={3}
-                  placeholder="Your message"
-                  defaultValue={singleProduct.description}
+        <form onSubmit={handleSubmit}>
+          <div className="row">
+            <div className="col-lg-3">
+              <div
+                className="detail__image">
+                <img src={singleProduct.image} alt={singleProduct.title}
                 />
-              </>
+              </div>
+            </div>
 
+            <div className="col-lg-9">
+              <div className="row">
+                <div className="col-lg-7">
+                  <label>
+                    Başlık
+                  </label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder={singleProduct.title}
+                    value={values.title}
+                    name="title"
+                    onChange={handleTitleInputChange}
+                  />
+                </div>
+
+                <div className="col-lg-5">
+                  <label>
+                    Fiyat
+                  </label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder={singleProduct.price}
+                    value={values.price}
+                    name="price"
+                    onChange={handlePriceInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-lg-7">
+                  <label>
+                    Kategori
+                  </label>
+
+                  <select className="form-select"
+                    onChange={handleCategoryInputChange}
+                  >
+                    <option value={values.category}
+                      name="category"
+                    >{singleProduct.category}</option>
+                  </select>
+                </div>
+
+                <div className="col-lg-5">
+                  <label>
+                    Stok
+                  </label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder={singleProduct ? singleProduct.title && singleProduct.rating.count : "Loading..."}
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-12">
+                  <label>
+                    Açıklama
+                  </label>
+
+                  <textarea
+                    className="form-control"
+                    placeholder={singleProduct.description}
+                    value={values.description}
+                    name="description"
+                    onChange={handleDescriptionInputChange}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="row">
-          <div className="col-12">
-            <button
-              type="submit"
-              className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={handleDeleteProduct}
-            >
-              Delete
-            </button>
+          <div className="row mt-5 justify-content-end">
+            <div className="col-12 col-md-2 text-end">
+              <button
+                type="button"
+                className="btn btn-danger btn-lg"
+                onClick={handleDeleteProduct}>Delete</button>
+            </div>
+            <div className="col-12 col-md-1 text-end">
+              <button
+                type="submit"
+                className="btn btn-warning btn-lg"
+              >
+                Save
+              </button>
+            </div>
           </div>
-        </div>
+        </form>
+
+        <Toaster
+          position="top-right" />
       </div>
     </>
   );
