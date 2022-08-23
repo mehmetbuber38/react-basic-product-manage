@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { ProductContext } from "../../context/ProductContext";
 
 export default function Dashboard() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    axios.get('https://fakestoreapi.com/products?limit=5')
-      .then(res => {
-        setProducts(res.data);
-      })
-  }, [products]);
+  const products = useContext(ProductContext);
 
   return (
     <>
@@ -35,40 +29,40 @@ export default function Dashboard() {
             </tr>
           </thead>
           <tbody>
-
+            {products.map((item, i) => {
+              return [
+                <tr key={i} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <th
+                    scope="row"
+                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    <img src={item.image} alt={item.title}
+                      className="p-1 bg-white border rounded max-w-sm" width="80" />
+                  </th>
+                  <td className="py-4 px-6">
+                    {item.title}
+                  </td>
+                  <td className="py-4 px-6">
+                    {`${item.description.substring(
+                      0,
+                      200
+                    )}...`}
+                  </td>
+                  <td className="py-4 px-6"> {item.price}</td>
+                  <td className="py-4 px-6">
+                    <Link
+                      to={`/${item.title}`}
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </Link>
+                  </td>
+                </tr>
+              ];
+            })}
           </tbody>
         </table>
       </div>
-
-      {products.map((item, i) => {
-        return [
-          <tr key={i} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th
-              scope="row"
-              className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              <img src={item.image} alt={item.title}
-                class="p-1 bg-white border rounded max-w-sm" width="80" />
-            </th>
-            <td className="py-4 px-6">
-              {item.title}
-            </td>
-            <td className="py-4 px-6">
-              {item.description}
-            </td>
-            <td className="py-4 px-6"> {item.price}</td>
-            <td className="py-4 px-6">
-              <a
-                href="#"
-                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td>
-          </tr>
-        ];
-      })}
-
     </>
   );
 }

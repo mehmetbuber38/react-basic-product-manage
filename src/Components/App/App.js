@@ -1,13 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login';
-import Preferences from '../Preferences/Preferences';
 import useToken from './useToken';
+import './App.css';
+import { ProductContextProvider } from "../../context/ProductContext";
+import DetailProduct from '../DetailProduct/DetailProduct';
 
 function App() {
-
   const { token, setToken } = useToken();
 
   if (!token) {
@@ -15,20 +15,21 @@ function App() {
   }
 
   return (
-    <div className="wrapper">
-      <h1>Application</h1>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route path="/preferences">
-            <Preferences />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <>
+      <ProductContextProvider>
+        <div className="wrapper">
+          <h1>Application</h1>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/dashboard" element={<Dashboard />}>
+              </Route>
+              <Route path="/:title" element={<DetailProduct />}>
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </ProductContextProvider>
+    </>
   );
 }
-
 export default App;
