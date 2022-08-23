@@ -4,11 +4,10 @@
 
 This is a talent assignment requested by a private company.
 Made close to the sent destination.
-In the remaining time, new features have been added by researching.
 
 ## Requirements
 
-For development, you will only need Node.js installed on your environement.
+For development, you will only need Node.js installed on your environment.
 And please use the appropriate [Editorconfig](http://editorconfig.org/) plugin for your Editor (not mandatory).
 
 ### Node
@@ -59,7 +58,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     $ yarn install or npm install
 
 ## Available Scripts
-!IMPORTANT: You must set up a mini node express server to be able to login and keep user information.
+!IMPORTANT: You must set up a mini 'node express' server to be able to login and keep user information.
 
 ### `node server`
 
