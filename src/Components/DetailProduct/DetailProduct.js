@@ -36,7 +36,7 @@ export default function DetailProduct() {
     }).then(res => res.json())
       .then(json => (
         console.log(json),
-        toast.success('Delete Product, please open console', {
+        toast.success('Ürün Silindi, lütfen geliştirici konsolundan geri dönüşe bakınız', {
           icon: '👏',
           style: {
             borderRadius: '10px',
@@ -91,7 +91,7 @@ export default function DetailProduct() {
       .then(res => res.json())
       .then(json => {
         console.log(json);
-        toast.success('Save Product, please open console', {
+        toast.success('Ürün Kaydedildi, lütfen geliştirici konsolundan geri dönüşe bakınız', {
           icon: '👏',
           style: {
             borderRadius: '10px',

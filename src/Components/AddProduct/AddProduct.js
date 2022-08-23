@@ -74,7 +74,7 @@ export default function AddProduct() {
       .then(res => res.json())
       .then(json => {
         console.log(json);
-        toast.success('Save Product, please open console', {
+        toast.success('Ürün Kaydedildi, lütfen geliştirici konsolundan geri dönüşe bakınız', {
           icon: '👏',
           style: {
             borderRadius: '10px',
@@ -93,7 +93,7 @@ export default function AddProduct() {
     }));
     setIsFilePicked(true);
 
-    toast.success('Photo Uploaded', {
+    toast.success('Fotoğraf yüklendi', {
       icon: '👏',
       style: {
         borderRadius: '10px',
