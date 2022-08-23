@@ -8,6 +8,20 @@ export default function Dashboard() {
   return (
     <>
       <div>
+        <div className="row">
+          <div className="col-md-6">
+            Ürün Listesi
+          </div>
+          <div className="col-md-6">
+            <Link
+              to="/add-product"
+              className="btn btn-danger btn-lg"
+            >
+              Yeni Ekle
+            </Link>
+          </div>
+        </div>
+
         <table className="table table-striped">
           <thead>
             <tr>

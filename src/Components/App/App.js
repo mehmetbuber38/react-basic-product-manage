@@ -5,6 +5,7 @@ import Login from '../Login/Login';
 import useToken from './useToken';
 import { ProductContextProvider } from "../../context/ProductContext";
 import DetailProduct from '../DetailProduct/DetailProduct';
+import AddProduct from '../AddProduct/AddProduct';
 
 function App() {
   const { token, setToken } = useToken();
@@ -23,6 +24,8 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}>
               </Route>
               <Route path="/:title" element={<DetailProduct />}>
+              </Route>
+              <Route path="/add-product" element={<AddProduct />}>
               </Route>
             </Routes>
           </BrowserRouter>

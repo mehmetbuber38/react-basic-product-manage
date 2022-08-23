@@ -27,6 +27,9 @@ export default function DetailProduct() {
   }, [title])
 
 
+  /***
+  * Handle Inputs
+  */
   const handleDeleteProduct = () => {
     fetch(`https://fakestoreapi.com/products/${singleProduct.id}`, {
       method: "DELETE"
@@ -76,8 +79,6 @@ export default function DetailProduct() {
       description: event.target.value,
     }));
   };
-
-  console.log({ values });
 
   const handleSubmit = (e) => {
     e.preventDefault();
