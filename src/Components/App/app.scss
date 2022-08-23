@@ -1,0 +1,11 @@
+.app {
+  @media (min-width: 992px) {
+    margin-top: 3rem;
+  }
+
+  &__logo {
+    display: block;
+    max-width: 193px;
+    margin-bottom: 54px;
+  }
+}

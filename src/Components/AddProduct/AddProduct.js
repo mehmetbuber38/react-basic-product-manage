@@ -106,122 +106,124 @@ export default function AddProduct() {
 
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-3">
-            <div
-              className="detail__image">
-              <img src={values?.image}
-              />
+      <div className="add-product">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3">
+              <div
+                className="detail__image">
+                <img src={values?.image}
+                />
+              </div>
+
+              <div className="mt-5">
+                <input type="file" name="file" className="btn btn-warning btn-md" onChange={changeHandler} />
+              </div>
             </div>
 
-            <div className="mt-5">
-              <input type="file" name="file" className="btn btn-warning btn-md" onChange={changeHandler} />
+            <div className="col-lg-9">
+              <div className="row">
+                <div className="col-lg-7">
+                  <label>
+                    Başlık
+                  </label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder={singleProduct.title}
+                    value={values.title}
+                    name="title"
+                    onChange={handleTitleInputChange}
+                  />
+                </div>
+
+                <div className="col-lg-5">
+                  <label>
+                    Fiyat
+                  </label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder={singleProduct.price}
+                    value={values.price}
+                    name="price"
+                    onChange={handlePriceInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-lg-7">
+                  <label>
+                    Kategori
+                  </label>
+
+                  <select className="form-select"
+                    name="category"
+                    onChange={handleCategoryInputChange}
+                  >
+                    {categories.map((option, index) => (
+                      <option key={index} value={option.value}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="col-lg-5">
+                  <label>
+                    Stok
+                  </label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder={singleProduct ? singleProduct.title && singleProduct.rating.count : "Loading..."}
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-12">
+                  <label>
+                    Açıklama
+                  </label>
+
+                  <textarea
+                    className="form-control"
+                    placeholder={singleProduct.description}
+                    value={values.description}
+                    name="description"
+                    onChange={handleDescriptionInputChange}
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="col-lg-9">
-            <div className="row">
-              <div className="col-lg-7">
-                <label>
-                  Başlık
-                </label>
-
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder={singleProduct.title}
-                  value={values.title}
-                  name="title"
-                  onChange={handleTitleInputChange}
-                />
+          <form onSubmit={handleFormSubmit}>
+            <div className="row mt-5 justify-content-end">
+              <div className="col-4 col-md-2 text-end">
+                <Link to="/" className="btn btn-danger btn-lg">
+                  İptal
+                </Link>
               </div>
-
-              <div className="col-lg-5">
-                <label>
-                  Fiyat
-                </label>
-
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder={singleProduct.price}
-                  value={values.price}
-                  name="price"
-                  onChange={handlePriceInputChange}
-                />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-lg-7">
-                <label>
-                  Kategori
-                </label>
-
-                <select className="form-select"
-                  name="category"
-                  onChange={handleCategoryInputChange}
+              <div className="col-3 col-md-1 text-end">
+                <button
+                  type="submit"
+                  className="btn btn-warning btn-lg"
                 >
-                  {categories.map((option, index) => (
-                    <option key={index} value={option.value}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="col-lg-5">
-                <label>
-                  Stok
-                </label>
-
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder={singleProduct ? singleProduct.title && singleProduct.rating.count : "Loading..."}
-                />
+                  Kaydet
+                </button>
               </div>
             </div>
+          </form>
 
-            <div className="row">
-              <div className="col-12">
-                <label>
-                  Açıklama
-                </label>
-
-                <textarea
-                  className="form-control"
-                  placeholder={singleProduct.description}
-                  value={values.description}
-                  name="description"
-                  onChange={handleDescriptionInputChange}
-                />
-              </div>
-            </div>
-          </div>
+          <Toaster
+            position="top-right" />
         </div>
-
-        <form onSubmit={handleFormSubmit}>
-          <div className="row mt-5 justify-content-end">
-            <div className="col-12 col-md-2 text-end">
-              <Link to="/" className="btn btn-danger btn-lg">
-                İptal
-              </Link>
-            </div>
-            <div className="col-12 col-md-1 text-end">
-              <button
-                type="submit"
-                className="btn btn-warning btn-lg"
-              >
-                Kaydet
-              </button>
-            </div>
-          </div>
-        </form>
-
-        <Toaster
-          position="top-right" />
       </div>
     </>
   );

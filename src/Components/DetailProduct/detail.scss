@@ -10,9 +10,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 25px;
 
     img {
       max-width: 150px;
     }
+  }
+
+  &__textarea {
+    height: 150px;
+    resize: none;
+  }
+
+  .form-control {
+    margin-bottom: 1.3rem !important;
   }
 }

@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 // create context
 const ProductContext = createContext();
 
-const ProductContextProvider = ({ children }) => {
+const ProductContextProvider = ({ children, limit }) => {
   // the value that will be given to the context
   const [products, setProducts] = useState([]);
 
@@ -13,7 +13,7 @@ const ProductContextProvider = ({ children }) => {
     const fetchProducts = () => {
       // this would usually be your own backend, or localStorage
       // for example
-      fetch('https://fakestoreapi.com/products?limit=5')
+      fetch(`https://fakestoreapi.com/products?limit=${limit}`)
         .then((response) => response.json())
         .then((result) => (
           setProducts(result)

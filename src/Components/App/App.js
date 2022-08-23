@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login';
 import useToken from './useToken';
@@ -16,20 +16,25 @@ function App() {
 
   return (
     <>
-      <ProductContextProvider>
-        <div className="wrapper">
-          <h1>Application</h1>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/dashboard" element={<Dashboard />}>
-              </Route>
-              <Route path="/:title" element={<DetailProduct />}>
-              </Route>
-              <Route path="/add-product" element={<AddProduct />}>
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </div>
+      <ProductContextProvider limit={10}>
+        <main className="app">
+          <div className='container'>
+            <a href="/">
+              <img src="hizli-geliyo-logo.svg" alt="Hızlı Geliyo" className='app__logo' />
+            </a>
+
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Dashboard />}>
+                </Route>
+                <Route path="/:title" element={<DetailProduct />}>
+                </Route>
+                <Route path="/add-product" element={<AddProduct />}>
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </div>
+        </main>
       </ProductContextProvider>
     </>
   );

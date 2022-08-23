@@ -9,8 +9,7 @@ async function loginUser(credentials) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
+  }).then(data => data.json())
 }
 
 export default function Login({ setToken }) {
@@ -27,22 +26,40 @@ export default function Login({ setToken }) {
   }
 
   return (
-    <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>Username</p>
-          <input type="text" onChange={e => setUserName(e.target.value)} />
-        </label>
-        <label>
-          <p>Password</p>
-          <input type="password" onChange={e => setPassword(e.target.value)} />
-        </label>
-        <div>
-          <button type="submit">Submit</button>
+    <>
+      <div className="login">
+        <div className='container'>
+          <div className='login__form'>
+            <form onSubmit={handleSubmit}>
+              <div className="row">
+                <div className='col-12'>
+                  <img src="hizli-geliyo-logo.svg" className='login__logo' alt="Hızlı Geliyo, istiyorsun geliyo" />
+                </div>
+
+                <div className="col-12">
+                  <label className='form-label'>
+                    <p className='sr-only'>Kullanıcı Adı</p>
+                  </label>
+                  <input type="text" className='form-control' onChange={e => setUserName(e.target.value)} />
+                </div>
+
+                <div className="col-12">
+                  <label className='form-label'>
+                    <p className='sr-only'>Şifre</p>
+                  </label>
+
+                  <input type="password" className='form-control' onChange={e => setPassword(e.target.value)} />
+                </div>
+              </div>
+
+              <div className='col-12 text-end mt-5'>
+                <button type="submit" className="btn btn-lg c-btn c-btn--orange">Giriş</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </>
   )
 }
 
