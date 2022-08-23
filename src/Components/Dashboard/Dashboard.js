@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductContext } from "../../context/ProductContext";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function Dashboard() {
   const products = useContext(ProductContext);
@@ -50,8 +51,10 @@ export default function Dashboard() {
                 return [
                   <tr key={i}>
                     <th>
-                      <img src={item.image} alt={item.title}
-                        className="" width="80" />
+                      <LazyLoadImage
+                        src={item.image}
+                        alt={item.title}
+                        width={80} />
                     </th>
                     <td>
                       {item.title}

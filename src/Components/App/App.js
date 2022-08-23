@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login';
 import useToken from './useToken';
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <ProductContextProvider limit={10}>
+      <ProductContextProvider limit={15}>
         <main className="app">
           <div className='container'>
             <a href="/">
