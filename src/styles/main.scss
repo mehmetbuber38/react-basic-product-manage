@@ -10,9 +10,15 @@
 @import "bootstrap/scss/grid";
 @import "bootstrap/scss/helpers";
 
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap");
+
 // others
 
 @import "../Components/DetailProduct/detail.scss";
 @import "../Components/AddProduct/add-product.scss";
 @import "../Components/App/app.scss";
 @import "c-btn";
+
+body {
+  font-family: "Titillium Web", sans-serif;
+}

@@ -40,7 +40,7 @@ export default function Login({ setToken }) {
                   <label className='form-label'>
                     <p className='sr-only'>Kullanıcı Adı</p>
                   </label>
-                  <input type="text" className='form-control' onChange={e => setUserName(e.target.value)} />
+                  <input type="text" className='form-control' placeholder="Kullanıcı Adı" onChange={e => setUserName(e.target.value)} />
                 </div>
 
                 <div className="col-12">
@@ -48,7 +48,7 @@ export default function Login({ setToken }) {
                     <p className='sr-only'>Şifre</p>
                   </label>
 
-                  <input type="password" className='form-control' onChange={e => setPassword(e.target.value)} />
+                  <input type="password" className='form-control' placeholder="Şifre" onChange={e => setPassword(e.target.value)} />
                 </div>
               </div>
 
