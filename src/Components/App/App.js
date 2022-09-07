@@ -20,7 +20,7 @@ function App() {
         <main className="app">
           <div className='container'>
             <a href="/">
-              <img src="hizli-geliyo-logo.svg" alt="Hızlı Geliyo" className='app__logo' />
+              <img src="treva.png" alt="Treva" className='app__logo' />
             </a>
 
             <BrowserRouter>

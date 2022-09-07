@@ -33,7 +33,7 @@ export default function Login({ setToken }) {
             <form onSubmit={handleSubmit}>
               <div className="row">
                 <div className='col-12'>
-                  <img src="hizli-geliyo-logo.svg" className='login__logo' alt="Hızlı Geliyo, istiyorsun geliyo" />
+                  <img src="treva.png" className='login__logo' alt="Treva" />
                 </div>
 
                 <div className="col-12">
